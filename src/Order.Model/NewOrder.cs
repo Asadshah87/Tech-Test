@@ -11,9 +11,6 @@ namespace Order.Model
         public Guid? ResellerId { get; set; }
         [RequiredGuid]
         public Guid? CustomerId { get; set; }
-
-        [RequiredGuid]
-        public Guid? StatusId { get; set; }
         public IEnumerable<NewOrderItem> Items { get; set; }
     }
 }

@@ -62,9 +62,9 @@ namespace Order.Service
         {
             var orderId = Guid.NewGuid();
 
-            var orderStatus = await _orderStatusRepository.GetOrdersByStatusIdAsync(newOrder.StatusId.Value);
-            if (orderStatus == null || orderStatus.Count() < 1)
-                throw new KeyNotFoundException("StatusID doesnot exist in the application");
+            Guid? orderStatus = await _orderStatusRepository.GetOrderStatusByName("Created");
+            if (orderStatus == null)
+                throw new KeyNotFoundException("Status Completed doesnot exist in the application");
 
 
             // convert model to entity
@@ -73,7 +73,7 @@ namespace Order.Service
                 Id = orderId.ToByteArray(),
                 CustomerId = newOrder.CustomerId.Value.ToByteArray(),
                 ResellerId = newOrder.ResellerId.Value.ToByteArray(),
-                StatusId = newOrder.StatusId.Value.ToByteArray(),
+                StatusId =  orderStatus.Value.ToByteArray(),
                 CreatedDate = DateTime.UtcNow,
                 Items = new List<Data.Entities.OrderItem>()
 

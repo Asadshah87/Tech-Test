@@ -310,7 +310,6 @@ namespace Order.Service.Tests
             {
                 ResellerId = Guid.NewGuid(),
                 CustomerId = Guid.NewGuid(),
-                StatusId = new Guid(_orderStatusCreatedId),
                 Items = new List<NewOrderItem>() { new NewOrderItem() {
                 ProductId =new Guid(_orderProductEmailId),
                 Quantity = 1,
